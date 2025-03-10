@@ -1,0 +1,110 @@
+@charset "UTF-8";
+
+/* General form styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+form {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+/* Form Layout with Two Columns */
+label {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 5px;
+    display: block;
+}
+
+input, select, button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+input[type="text"], input[type="email"], input[type="password"], select {
+    background-color: #f9f9f9;
+}
+
+button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+     background-color: #218838;
+}
+
+/* Driver-specific fields */
+#driverFields {
+    display: none;
+}
+
+/* Two columns layout for inputs */
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+.form-row .form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-row .form-group input, .form-row .form-group select {
+    width: 100%;
+}
+
+.form-row .form-group:last-child {
+    margin-right: 0;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+    form {
+        width: 90%;
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+
+    .form-row .form-group {
+        width: 100%;
+    }
+
+    button {
+        font-size: 14px;
+    }
+}

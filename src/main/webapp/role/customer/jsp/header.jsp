@@ -32,16 +32,17 @@
         <nav>
             <ul class="nav-links">
                 <li><a href="index.jsp">Home</a></li>
-                <li><a href="hotels.jsp">Hotels</a></li>
+                <li><a href="<%= request.getContextPath() %>/role/customer/jsp/AddBooking.jsp">Booking</a></li>
                 <li><a href="bookings.jsp">My Bookings</a></li>
                 <li><a href="contact.jsp">Contact</a></li>
 
                 <% if (loggedInUser != null) { %>
                     <li><a href="#">Welcome, <%= userName %></a></li>
-                    <li><a href="<%= request.getContextPath() %>/logout" class="login-btn">Logout</a></li>
-                <% } else { %>
-                    <li><a href="login.jsp" class="login-btn">Login</a></li>
+                    <li><a href="<%= request.getContextPath() %>/role/logout" class="login-btn">Logout</a></li>
+                <% } else  { %>
+                    <li><a href="<%= request.getContextPath() %>/role/login.jsp" class="login-btn">Login</a></li>
                 <% } %>
+                    <li><a href="<%= request.getContextPath() %>/role/register.jsp">Register</a></li>
             </ul>
             <div class="menu-toggle" onclick="toggleMenu()">☰</div>
         </nav>

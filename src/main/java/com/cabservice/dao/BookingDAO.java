@@ -80,6 +80,21 @@ public class BookingDAO {
 	            return false;
 	        }
 	    }
+	  
+	  public boolean cancelBooking(int bookingId) {
+	        String query = "UPDATE bookings SET ride_status = 'CANCELLED' WHERE id = ?";
+
+	        try (Connection conn = DBConnection.getConnection();
+	             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+	            pstmt.setInt(1, bookingId);
+	            return pstmt.executeUpdate() > 0;
+
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	            return false;
+	        }
+	    }
 
 
 }

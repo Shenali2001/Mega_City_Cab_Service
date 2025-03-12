@@ -37,6 +37,15 @@
         <p id="CANCELLED" class="status-description">❌ **Cancelled:** Your booking has been cancelled as per request or due to other reasons.</p>
 
         <!-- Table for Requested Bookings -->
+        <% String success = request.getParameter("success"); %>
+<% if ("bookingCancelled".equals(success)) { %>
+    <p class="success">Booking cancelled successfully!</p>
+<% } %>
+
+<% String error = request.getParameter("error"); %>
+<% if ("cancelFailed".equals(error)) { %>
+    <p class="error">Failed to cancel booking. Please try again.</p>
+<% } %>
        
         <table id="requestedTable" class="status-table">
    
@@ -56,14 +65,46 @@
                         <td>${booking.dropOffLocation}</td>
                         <td>${booking.price}</td>
                         <td>${booking.vehicleType}</td>
-                        <td><button class="action-btn">Cancel</button></td>
+                       <td>
+						    <button class="action-btn cancel-btn" data-booking-id="${booking.id}">Cancel</button>
+						</td>
                     </tr>
                 </c:forEach>
 
             </tbody>
         </table>
     </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Handle cancel button click
+        $(".cancel-btn").click(function () {
+            const bookingId = $(this).data("booking-id");
+            const row = $(this).closest("tr"); // Get the row to remove
 
+            // Send an AJAX request to cancel the booking
+            $.ajax({
+                url: "${pageContext.request.contextPath}/cancel-booking",
+                type: "POST",
+                data: { bookingId: bookingId },
+                success: function (response) {
+                    if (response === "success") {
+                        // Remove the row from the table
+                        row.fadeOut(300, function () {
+                            row.remove();
+                        });
+                        alert("Booking cancelled successfully!");
+                    } else {
+                        alert("Failed to cancel booking. Please try again.");
+                    }
+                },
+                error: function () {
+                    alert("An error occurred. Please try again.");
+                }
+            });
+        });
+    });
+</script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const menuItems = document.querySelectorAll(".menu-item");
@@ -93,6 +134,8 @@
                 });
             });
         });
+        
+        
     </script>
 </body>
 </html>

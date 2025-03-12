@@ -22,6 +22,6 @@ public class BookingService {
 
 
     public boolean cancelBooking(int bookingId) {
-        return bookingDAO.updateBookingStatus(bookingId, "CANCELLED");
+        return bookingDAO.cancelBooking(bookingId);
     }
 }

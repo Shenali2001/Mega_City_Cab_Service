@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet("/cancel-booking")
 public class CancelBookingServlet extends HttpServlet {
@@ -18,29 +19,17 @@ public class CancelBookingServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Get the booking ID from the request
-        String bookingId = request.getParameter("bookingId");
+        int bookingId = Integer.parseInt(request.getParameter("bookingId"));
+        boolean isCancelled = bookingService.cancelBooking(bookingId);
 
-        if (bookingId == null || bookingId.isEmpty()) {
-            response.sendRedirect(request.getContextPath() + "/role/customer/jsp/view-booking.jsp?error=invalidBookingId");
-            return;
+        response.setContentType("text/plain");
+        PrintWriter out = response.getWriter();
+
+        if (isCancelled) {
+            out.print("success");
+        } else {
+            out.print("error");
         }
-
-        try {
-            // Call the service to cancel the booking
-            boolean isCancelled = bookingService.cancelBooking(Integer.parseInt(bookingId));
-
-            if (isCancelled) {
-                response.sendRedirect(request.getContextPath() + "/role/customer/jsp/view-booking.jsp?success=bookingCancelled");
-            } else {
-                response.sendRedirect(request.getContextPath() + "/role/customer/jsp/view-booking.jsp?error=cancellationFailed");
-            }
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-            response.sendRedirect(request.getContextPath() + "/role/customer/jsp/view-booking.jsp?error=invalidBookingId");
-        } catch (Exception e) {
-            e.printStackTrace();
-            response.sendRedirect(request.getContextPath() + "/role/customer/jsp/view-booking.jsp?error=serverError");
-        }
+        out.flush();
     }
 }

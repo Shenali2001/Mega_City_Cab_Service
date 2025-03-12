@@ -32,8 +32,8 @@
         <nav>
             <ul class="nav-links">
                 <li><a href="index.jsp">Home</a></li>
-                <li><a href="<%= request.getContextPath() %>/role/customer/jsp/AddBooking.jsp">Booking</a></li>
-                <li><a href="bookings.jsp">My Bookings</a></li>
+                <li><a href="<%= request.getContextPath() %>/role/customer/jsp/AddBooking.jsp">New Booking</a></li>
+                <li><a href="<%= request.getContextPath() %>/role/customer/jsp/view-booking.jsp">View Bookings</a></li>
                 <li><a href="contact.jsp">Contact</a></li>
 
                 <% if (loggedInUser != null) { %>

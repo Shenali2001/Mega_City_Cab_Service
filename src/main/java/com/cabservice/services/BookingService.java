@@ -24,4 +24,9 @@ public class BookingService {
     public boolean cancelBooking(int bookingId) {
         return bookingDAO.cancelBooking(bookingId);
     }
+    
+    // Fetch for Requested Booking for Admin  
+    public List<Booking> getRequestedBookings() {
+        return bookingDAO.getRequestedBookings();
+    }
 }

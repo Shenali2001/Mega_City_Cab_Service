@@ -78,6 +78,9 @@
 	        <label for="dropoff">Drop-off Location:</label>
 	        <input type="text" id="dropoff" name="dropoff" required>
 	        
+	         <label for="dropoff">Mobile:</label>
+	        <input type="text" id="mobile" name="mobile" required>
+	        
 	        <div class="form-group">
 	            <label for="length_of_ride">Length of Ride (in km)</label>
 	            <input type="number" step="0.01" id="length_of_ride" name="length_of_ride" required>

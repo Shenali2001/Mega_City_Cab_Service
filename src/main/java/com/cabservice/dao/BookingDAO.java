@@ -14,8 +14,9 @@ import java.sql.Connection;
 
 public class BookingDAO {
 
+	// New Booking Adding
 	 public boolean insertBooking(Booking booking) {
-	        String query = "INSERT INTO bookings (Pickup_Location, Drop_off_location, customer_username, price, length_of_ride, ride_status, vehicleType) VALUES (?, ?, ?, ?, ?, ?, ?)";
+	        String query = "INSERT INTO bookings (Pickup_Location, Drop_off_location, mobile, customer_username, price, length_of_ride, ride_status, vehicleType) VALUES (?, ?, ?, ?, ?, ?, ? , ?)";
 
 	        try (Connection conn = DBConnection.getConnection();
 	        		 PreparedStatement pstmt = conn.prepareStatement(query))
@@ -23,11 +24,12 @@ public class BookingDAO {
 
 	        	  pstmt.setString(1, booking.getPickupLocation());
 	        	  pstmt.setString(2, booking.getDropOffLocation());
-	              pstmt.setString(3, booking.getCustomerUsername());
-	              pstmt.setDouble(4, booking.getPrice());
-	              pstmt.setDouble(5, booking.getLengthOfRide());
-	              pstmt.setString(6, booking.getRideStatus());
-	              pstmt.setString(7, booking.getVehicleType());
+	        	  pstmt.setString(3, booking.getMobile());
+	              pstmt.setString(4, booking.getCustomerUsername());
+	              pstmt.setDouble(5, booking.getPrice());
+	              pstmt.setDouble(6, booking.getLengthOfRide());
+	              pstmt.setString(7, booking.getRideStatus());
+	              pstmt.setString(8, booking.getVehicleType());
 
 	              return pstmt.executeUpdate() > 0;
 
@@ -37,6 +39,7 @@ public class BookingDAO {
 	        }
 	    }
 	 
+	 // Get Booking By Current User
 	 public List<Booking> getBookingsByCustomerUsername(String customerUsername) {
 	        List<Booking> bookings = new ArrayList<>();
 	        String query = "SELECT * FROM bookings WHERE customer_username = ?";
@@ -65,6 +68,7 @@ public class BookingDAO {
 	        return bookings;
 	    }
 	 
+	 
 	  public boolean updateBookingStatus(int bookingId, String status) {
 	        String query = "UPDATE bookings SET ride_status = ? WHERE id = ?";
 
@@ -81,6 +85,7 @@ public class BookingDAO {
 	        }
 	    }
 	  
+	  // Cancel Booking
 	  public boolean cancelBooking(int bookingId) {
 	        String query = "UPDATE bookings SET ride_status = 'CANCELLED' WHERE id = ?";
 
@@ -96,5 +101,30 @@ public class BookingDAO {
 	        }
 	    }
 
+    // Fetch for Requested Booking for Admin  
+	   public List<Booking> getRequestedBookings() {
+	        List<Booking> bookings = new ArrayList<>();
+	        String query = "SELECT * FROM bookings WHERE ride_status = 'REQUESTED'";
 
+	        try (Connection conn = DBConnection.getConnection();
+	             PreparedStatement pstmt = conn.prepareStatement(query);
+	             ResultSet rs = pstmt.executeQuery()) {
+
+	            while (rs.next()) {
+	                Booking booking = new Booking();
+	                booking.setId(rs.getInt("id"));
+	                booking.setPickupLocation(rs.getString("Pickup_Location"));
+	                booking.setDropOffLocation(rs.getString("Drop_off_location"));
+	                booking.setCustomerUsername(rs.getString("customer_username"));
+	                booking.setPrice(rs.getDouble("price"));
+	                booking.setLengthOfRide(rs.getDouble("length_of_ride"));
+	                booking.setVehicleType(rs.getString("vehicleType"));
+	                booking.setMobile(rs.getString("mobile"));
+	                bookings.add(booking);
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	        return bookings;
+	    }
 }

@@ -111,4 +111,33 @@ public class UserDAO {
         }
         return customers;
     }
+    
+   // get all Riders for admin
+    public List<User> getAllDrivers() {
+        List<User> drivers = new ArrayList<>();
+        String query = "SELECT * FROM users WHERE role = 'DRIVER'";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                User user = new User(
+                        rs.getInt("user_id"),
+                        rs.getString("full_name"),
+                        rs.getString("email"),
+                        rs.getString("password"),
+                        rs.getString("phone"),
+                        rs.getString("address"),
+                        rs.getString("role"),
+                        rs.getString("license"),
+                        rs.getString("vehicleType"),
+                        rs.getString("vehicleNumber")
+                );
+                drivers.add(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return drivers;
+    }
 }

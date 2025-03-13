@@ -73,6 +73,37 @@
 
             </tbody>
         </table>
+        
+         <!-- Table for Cancelled Bookings -->
+         <form action="${pageContext.request.contextPath}/view-cancle-bookings-customer" method="get">
+            <button type="submit" class="view-cancelled-btn">View Cancelled Bookings</button>
+        </form>
+        
+        <table id="cancelledTable" class="status-table">
+            <thead>
+                <tr>
+                    <th>Pickup Location</th>
+                    <th>Drop Location</th>
+                    <th>Price</th>
+                    <th>Vehicle Type</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <c:forEach var="booking" items="${bookings}">
+                    <tr>
+                        <td>${booking.pickupLocation}</td>
+                        <td>${booking.dropOffLocation}</td>
+                        <td>${booking.price}</td>
+                        <td>${booking.vehicleType}</td>
+						<td style="color: red;">
+						    Cancelled
+						</td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
+        
     </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
@@ -130,6 +161,10 @@
                     // Show the table if "Requested" is clicked
                     if (selectedStatus === "REQUESTED") {
                         requestedTable.style.display = "table";
+                    }
+                    
+                    if (selectedStatus === "CANCELLED") {
+                    	cancelledTable.style.display = "table";
                     }
                 });
             });

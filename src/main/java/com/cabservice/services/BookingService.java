@@ -29,4 +29,9 @@ public class BookingService {
     public List<Booking> getRequestedBookings() {
         return bookingDAO.getRequestedBookings();
     }
+    
+ // View-Cancle Booking For Customer
+    public List<Booking> getCancelledBookingsByCustomerUsername(String customerUsername) {
+        return bookingDAO.getCancelledBookingsByCustomerUsername(customerUsername);
+    }
 }

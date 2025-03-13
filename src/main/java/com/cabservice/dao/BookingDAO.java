@@ -127,4 +127,33 @@ public class BookingDAO {
 	        }
 	        return bookings;
 	    }
+	   
+	   // View-Cancle Booking For Customer
+	   public List<Booking> getCancelledBookingsByCustomerUsername(String customerUsername) {
+	        List<Booking> bookings = new ArrayList<>();
+	        String query = "SELECT * FROM bookings WHERE customer_username = ? AND ride_status = 'CANCELLED'";
+
+	        try (Connection conn = DBConnection.getConnection();
+	             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+	            pstmt.setString(1, customerUsername);
+	            ResultSet rs = pstmt.executeQuery();
+
+	            while (rs.next()) {
+	                Booking booking = new Booking();
+	                booking.setId(rs.getInt("id"));
+	                booking.setPickupLocation(rs.getString("Pickup_Location"));
+	                booking.setDropOffLocation(rs.getString("Drop_off_location"));
+	                booking.setCustomerUsername(rs.getString("customer_username"));
+	                booking.setPrice(rs.getDouble("price"));
+	                booking.setLengthOfRide(rs.getDouble("length_of_ride"));
+	                booking.setRideStatus(rs.getString("ride_status"));
+	                booking.setVehicleType(rs.getString("vehicleType"));
+	                bookings.add(booking);
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	        return bookings;
+	    }
 }

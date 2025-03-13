@@ -32,9 +32,9 @@
         <nav>
             <ul class="nav-links">
                 <li><a href="index.jsp">Home</a></li>
-                <li><a href="hotels.jsp">Hotels</a></li>
-                <li><a href="bookings.jsp">My Bookings</a></li>
-                <li><a href="contact.jsp">Contact</a></li>
+                <li><a href="<%= request.getContextPath() %>/role/admin/jsp/manage-booking.jsp">Manage Bookings</a></li>
+                <li><a href="bookings.jsp">Manage Customers</a></li>
+                <li><a href="contact.jsp">Manage Drivers</a></li>
 
                 <% if (loggedInUser != null) { %>
                     <li><a href="#">Welcome, <%= userName %></a></li>

@@ -38,6 +38,7 @@ public class BookingServlet extends HttpServlet {
         try {
             String pickupLocation = request.getParameter("pickup");
             String dropOffLocation = request.getParameter("dropoff");
+            String mobile = request.getParameter("mobile");
             double lengthOfRide = Double.parseDouble(request.getParameter("length_of_ride"));
             
             // Convert vehicleType to uppercase to match ENUM values
@@ -48,6 +49,7 @@ public class BookingServlet extends HttpServlet {
             Booking booking = new Booking();
             booking.setCustomerUsername(customerUsername);
             booking.setPickupLocation(pickupLocation);
+            booking.setMobile(mobile);
             booking.setDropOffLocation(dropOffLocation);
             booking.setLengthOfRide(lengthOfRide);
             booking.setVehicleType(vehicleType);

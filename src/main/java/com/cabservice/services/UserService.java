@@ -26,4 +26,9 @@ public class UserService {
 	    public List<User> getAllDrivers() {
 	        return userDAO.getAllDrivers();
 	    }
+	    
+	    //Delete Rider
+	    public boolean deleteDriver(int userId) {
+	        return userDAO.deleteDriver(userId);
+	    }
 }

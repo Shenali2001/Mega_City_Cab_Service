@@ -21,4 +21,9 @@ public class UserService {
 	    public List<User> getAllCustomers() {
 	        return userDAO.getAllCustomers();
 	    }
+	    
+	    //Get all riders display for admin
+	    public List<User> getAllDrivers() {
+	        return userDAO.getAllDrivers();
+	    }
 }

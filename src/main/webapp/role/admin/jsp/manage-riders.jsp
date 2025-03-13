@@ -25,31 +25,19 @@
                     <th>Action</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>John Doe</td>
-                    <td>john@example.com</td>
-                    <td>+1234567890</td>
-                    <td>123 Main Street, NY</td>
-                    <td>john@example.com</td>
-                    <td>+1234567890</td>
-                    <td>123 Main Street, NY</td>
-                     <td>
-                            <button class="delete-btn">Detete</button> <br><br>
-                        </td>
-                </tr>
-                <tr>
-                    <td>Jane Smith</td>
-                    <td>jane@example.com</td>
-                    <td>+9876543210</td>
-                    <td>456 Park Avenue, CA</td>
-                    <td>john@example.com</td>
-                    <td>+1234567890</td>
-                    <td>123 Main Street, NY</td>
-                     <td>
-                            <button class="delete-btn">Detete</button> <br><br>
-                        </td>
-                </tr>
+       <tbody>
+                <c:forEach var="driver" items="${drivers}">
+                    <tr>
+                        <td>${driver.fullName}</td>
+                        <td>${driver.email}</td>
+                        <td>${driver.phone}</td>
+                        <td>${driver.address}</td>
+                        <td>${driver.license}</td>
+                        <td>${driver.vehicleType}</td>
+                        <td>${driver.vehicleNumber}</td>
+                        <td> <button class="delete-btn">Delete</button></td>
+                    </tr>
+                </c:forEach>
             </tbody>
         </table>
     </div>

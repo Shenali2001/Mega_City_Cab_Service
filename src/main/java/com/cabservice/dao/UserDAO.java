@@ -140,4 +140,18 @@ public class UserDAO {
         }
         return drivers;
     }
+    
+    //Delete Rider - Admin
+    public boolean deleteDriver(int userId) {
+        String query = "DELETE FROM users WHERE user_id = ? AND role = 'DRIVER'";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setInt(1, userId);
+            return pstmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

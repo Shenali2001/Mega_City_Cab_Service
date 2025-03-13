@@ -1,5 +1,7 @@
 package com.cabservice.services;
 
+import java.util.List;
+
 import com.cabservice.dao.UserDAO;
 import com.cabservice.models.User;
 
@@ -13,5 +15,10 @@ public class UserService {
 
 	    public User loginUser(String email, String password) {
 	        return userDAO.loginUser(email, password);
+	    }
+	    
+	    //Get all customer display for admin
+	    public List<User> getAllCustomers() {
+	        return userDAO.getAllCustomers();
 	    }
 }

@@ -40,9 +40,9 @@ public class UserDAO {
             pstmt.setString(4, user.getPhone());
             pstmt.setString(5, user.getAddress());
             pstmt.setString(6, user.getRole());
-            pstmt.setString(7, user.getLicense());
-            pstmt.setString(8, user.getVehicleType());
-            pstmt.setString(9, user.getVehicleNumber());
+            pstmt.setString(7, user.getLicense());  // This can be null
+            pstmt.setString(8, user.getVehicleType());  // This can be null
+            pstmt.setString(9, user.getVehicleNumber());  // This can be null
 
             return pstmt.executeUpdate() > 0;
         } catch (SQLException e) {

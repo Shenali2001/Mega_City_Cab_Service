@@ -81,7 +81,6 @@
 document.getElementById("role").addEventListener("change", function() {
     document.getElementById("driverFields").style.display = this.value === "driver" ? "block" : "none";
 });
-
 </script>
 </body>
 </html>

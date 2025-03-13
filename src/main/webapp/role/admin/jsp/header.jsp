@@ -33,14 +33,14 @@
             <ul class="nav-links">
                 <li><a href="index.jsp">Home</a></li>
                 <li><a href="<%= request.getContextPath() %>/role/admin/jsp/manage-booking.jsp">Manage Bookings</a></li>
-                <li><a href="bookings.jsp">Manage Customers</a></li>
-                <li><a href="contact.jsp">Manage Drivers</a></li>
+                <li><a href="<%= request.getContextPath() %>/customers">Manage Customers</a></li>
+                <li><a href="<%= request.getContextPath() %>/role/admin/jsp/manage-riders.jsp">Manage Drivers</a></li>
 
                 <% if (loggedInUser != null) { %>
                     <li><a href="#">Welcome, <%= userName %></a></li>
                     <li><a href="<%= request.getContextPath() %>/logout" class="login-btn">Logout</a></li>
                 <% } else { %>
-                    <li><a href="login.jsp" class="login-btn">Login</a></li>
+                    <li><a href="<%= request.getContextPath() %>/role/login.jsp">Login</a></li>
                 <% } %>
             </ul>
             <div class="menu-toggle" onclick="toggleMenu()">☰</div>

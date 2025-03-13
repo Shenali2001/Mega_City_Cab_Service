@@ -6,7 +6,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.cabservice.models.Booking;
 import com.cabservice.models.User;
 import utills.DBConnection;
 
@@ -78,5 +81,34 @@ public class UserDAO {
             e.printStackTrace();
         }
         return null;
+    }
+    
+    // Get all customer display for admin
+    public List<User> getAllCustomers() {
+        List<User> customers = new ArrayList<>();
+        String query = "SELECT * FROM users WHERE role = 'CUSTOMER'";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                User user = new User(
+                        rs.getInt("user_id"),
+                        rs.getString("full_name"),
+                        rs.getString("email"),
+                        rs.getString("password"),
+                        rs.getString("phone"),
+                        rs.getString("address"),
+                        rs.getString("role"),
+                        rs.getString("license"),
+                        rs.getString("vehicleType"),
+                        rs.getString("vehicleNumber")
+                );
+                customers.add(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return customers;
     }
 }

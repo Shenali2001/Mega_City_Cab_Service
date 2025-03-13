@@ -9,40 +9,12 @@
      <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <link rel="stylesheet" href="<c:url value='/role/customer/css/addBooking.css'/>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
-    <script>
-        function calculatePrice() {
-            var vehicleType = document.querySelector('input[name="vehicleType"]:checked');
-            var lengthOfRide = parseFloat(document.getElementById('length_of_ride').value);
-            var priceField = document.getElementById('price');
-
-            if (vehicleType && !isNaN(lengthOfRide)) {
-                var vehicleRates = {
-                    "car": 100,
-                    "bike": 50,
-                    "suv": 150,
-                    "van": 120
-                };
-                var rate = vehicleRates[vehicleType.value] || 0;
-                var price = rate * lengthOfRide;
-                priceField.value = price.toFixed(2);
-            }
-        }
-
-        window.onload = function() {
-            calculatePrice();
-            var vehicleRadios = document.querySelectorAll('input[name="vehicleType"]');
-            vehicleRadios.forEach(function(radio) {
-                radio.addEventListener('change', calculatePrice);
-            });
-            document.getElementById('length_of_ride').addEventListener('input', calculatePrice);
-        };
-    </script>
+    <!-- Include the header -->
 </head>
+   <jsp:include page="/role/customer/jsp/header.jsp" />
 <body>
 
- <!-- Include the header -->
-    <jsp:include page="/role/customer/jsp/header.jsp" />
+ 
     <div class="container">
       <form action="${pageContext.request.contextPath}/add-booking" method="post">
          <h2>Book a Ride</h2>
@@ -115,6 +87,34 @@
 	
 	        <button type="submit">Book Now</button>
     </form>
+        <script>
+        function calculatePrice() {
+            var vehicleType = document.querySelector('input[name="vehicleType"]:checked');
+            var lengthOfRide = parseFloat(document.getElementById('length_of_ride').value);
+            var priceField = document.getElementById('price');
+
+            if (vehicleType && !isNaN(lengthOfRide)) {
+                var vehicleRates = {
+                    "car": 100,
+                    "bike": 50,
+                    "suv": 150,
+                    "van": 120
+                };
+                var rate = vehicleRates[vehicleType.value] || 0;
+                var price = rate * lengthOfRide;
+                priceField.value = price.toFixed(2);
+            }
+        }
+
+        window.onload = function() {
+            calculatePrice();
+            var vehicleRadios = document.querySelectorAll('input[name="vehicleType"]');
+            vehicleRadios.forEach(function(radio) {
+                radio.addEventListener('change', calculatePrice);
+            });
+            document.getElementById('length_of_ride').addEventListener('input', calculatePrice);
+        };
+    </script>
 </div>
 </body>
 </html>

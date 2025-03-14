@@ -30,9 +30,14 @@ public class BookingService {
         return bookingDAO.getRequestedBookings();
     }
     
- // View-Cancle Booking For Customer
+   // View-Cancle Booking For Customer
     public List<Booking> getCancelledBookingsByCustomerUsername(String customerUsername) {
         return bookingDAO.getCancelledBookingsByCustomerUsername(customerUsername);
+    }
+    
+    // View-Assgn Rider
+    public boolean assignRider(int bookingId, String riderUsername, String vehicleNumber) {
+        return bookingDAO.assignRider(bookingId, riderUsername, vehicleNumber);
     }
     
 }

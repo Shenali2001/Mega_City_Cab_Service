@@ -31,13 +31,13 @@
         </div>
         <nav>
             <ul class="nav-links">
-                <li><a href="index.jsp">Home</a></li>
+                <li><a href="<%= request.getContextPath() %>/role/customer/jsp/index.jsp">Home</a></li>
                 <li><a href="<%= request.getContextPath() %>/role/customer/jsp/AddBooking.jsp">New Booking</a></li>
                 <li><a href="<%= request.getContextPath() %>/role/customer/jsp/view-booking.jsp">View Bookings</a></li>
-                <li><a href="contact.jsp">Contact</a></li>
+                
 
                 <% if (loggedInUser != null) { %>
-                    <li><a href="#">Welcome, <%= userName %></a></li>
+                    <li><a href="#" style="color: yellow;" ><%= userName %></a></li>
                     <li><a href="<%= request.getContextPath() %>/role/logout" class="login-btn">Logout</a></li>
                 <% } else  { %>
                     <li><a href="<%= request.getContextPath() %>/role/login.jsp" class="login-btn">Login</a></li>

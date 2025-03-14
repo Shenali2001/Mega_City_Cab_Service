@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.cabservice.models.Booking;
+
 import com.cabservice.models.User;
 import utills.DBConnection;
 
@@ -154,4 +154,37 @@ public class UserDAO {
             return false;
         }
     }
+    
+    //get Riders By Vehicle-Type  -  admin
+    public List<User> getRidersByVehicleType(String vehicleType) {
+        List<User> riders = new ArrayList<>();
+        String query = "SELECT * FROM users WHERE role = 'DRIVER' AND vehicleType = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, vehicleType);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                User user = new User(
+                        rs.getInt("user_id"),
+                        rs.getString("full_name"),
+                        rs.getString("email"),
+                        rs.getString("password"),
+                        rs.getString("phone"),
+                        rs.getString("address"),
+                        rs.getString("role"),
+                        rs.getString("license"),
+                        rs.getString("vehicleType"),
+                        rs.getString("vehicleNumber")
+                );
+                riders.add(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return riders;
+    }
+    
+    
 }

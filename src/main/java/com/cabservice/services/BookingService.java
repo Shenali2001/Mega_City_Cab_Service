@@ -34,4 +34,5 @@ public class BookingService {
     public List<Booking> getCancelledBookingsByCustomerUsername(String customerUsername) {
         return bookingDAO.getCancelledBookingsByCustomerUsername(customerUsername);
     }
+    
 }

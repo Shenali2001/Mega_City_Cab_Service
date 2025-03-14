@@ -31,4 +31,9 @@ public class UserService {
 	    public boolean deleteDriver(int userId) {
 	        return userDAO.deleteDriver(userId);
 	    }
+	    
+	    // get Riders By Vehicle-Type
+	    public List<User> getRidersByVehicleType(String vehicleType) {
+	        return userDAO.getRidersByVehicleType(vehicleType);
+	    }
 }

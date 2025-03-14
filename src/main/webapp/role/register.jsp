@@ -10,7 +10,9 @@
     <link rel="stylesheet" href="<c:url value='/css/register.css'/>">
 </head>
 <body>
+
 <form action="${pageContext.request.contextPath}/register" method="post">
+   <h1>Registration Form</h1>
     <div class="form-row">
         <div class="form-group">
             <label for="fullName">Full Name:</label>

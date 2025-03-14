@@ -157,6 +157,25 @@ public class BookingDAO {
 	        return bookings;
 	    }
 	   
+	   // Assign Rider
+	    public boolean assignRider(int bookingId, String riderUsername, String vehicleNumber) {
+	        String query = "UPDATE bookings SET rider_username = ?, vehicleNumber = ?, ride_status = 'ASSIGNED' WHERE id = ?";
+	        
+	        try (Connection conn = DBConnection.getConnection();
+	             PreparedStatement pstmt = conn.prepareStatement(query)) {
+	            
+	            pstmt.setString(1, riderUsername);
+	            pstmt.setString(2, vehicleNumber);
+	            pstmt.setInt(3, bookingId);
+	            
+	            int rowsAffected = pstmt.executeUpdate();
+	            return rowsAffected > 0;
+	            
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	            return false;
+	        }
+	    }
 	   
 	   
 	   

@@ -81,6 +81,7 @@
                 <div class="modal-body">
                     <form id="assignRiderForm" action="assign-rider" method="post">
                         <input type="hidden" id="bookingId" name="bookingId">
+                        <input type="hidden" id="vehicleNumber" name="vehicleNumber">
                         
                         <div class="mb-3">
                             <label for="riderSelect" class="form-label">Select Rider:</label>
@@ -165,6 +166,7 @@
                 document.getElementById('vehicleType').textContent = selectedOption.dataset.vehicleType;
                 document.getElementById('plateNumber').textContent = selectedOption.dataset.plateNumber;
                 document.getElementById('riderMobile').textContent = selectedOption.dataset.mobile;
+                document.getElementById('vehicleNumber').value = selectedOption.dataset.plateNumber;
                 detailsDiv.style.display = 'block';
             } else {
                 // Hide details if no rider selected
